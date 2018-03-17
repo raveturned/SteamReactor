@@ -10,7 +10,8 @@ const routes = {
     resolveVanityURL: 'http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/',
 };
 
-const delay = ms => new Promise(r => setTimeout(r, ms));
+const delayTime = 3000;
+const delayPromise = ms => new Promise(r => setTimeout(r, ms));
 
 function getSupportedAPIList() {
     const args = {
@@ -22,7 +23,7 @@ function getSupportedAPIList() {
 }
 
 const steam = {
-    getSupportedAPIList: () => delay(3000).then(() => getSupportedAPIList()),
+    getSupportedAPIList: () => delayPromise(delayTime).then(() => getSupportedAPIList()),
 };
 
 export default steam;
