@@ -1,0 +1,12 @@
+.apiInterface {
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.apiList {
+    background-color: grey;
+    border-radius: 5px;
+    padding: 5px;
+}

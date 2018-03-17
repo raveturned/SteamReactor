@@ -1,6 +1,7 @@
 import React from 'react';
 import Steam from '../../../api/steam';
 import SteamApiInterface from './steamApiInterface';
+import styles from './styles.css';
 
 class SteamApiList extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class SteamApiList extends React.Component {
 
     render() {
         return (
-            <div className="apiList">
+            <div className={styles.apiList}>
                 {this.state.interfaces.map(i => (<SteamApiInterface
                     key={i.name}
                     name={i.name}

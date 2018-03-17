@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SteamApiMethod from './steamApiMethod';
+import styles from './styles.css';
 
 const SteamApiInterface = props => (
-    <div className="apiInterface">
+    <div className={styles.apiInterface}>
         {props.name}
         <ul>
             {props.methods.map(m => (

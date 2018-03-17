@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: ['es6-promise', 'whatwg-fetch','./react/index.jsx'],
@@ -14,7 +15,29 @@ module.exports = {
     },
     module: {
         loaders: [
-            { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/ }
+            { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/ },
+            {
+                test: /\.(gif|jp(e)g|png|svg)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                    name: "images/[name].[hash].[ext]",
+                    },
+                },
+            },
+            {
+                test: /\.css$/,
+                use: [
+                        { loader: "style-loader" },
+                        { 
+                            loader: 'css-loader',
+                            query: {
+                                modules: true,
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                        }
+                    }
+                ]
+            }
         ]
     },
     devtool: 'cheap-module-eval-source-map',
@@ -27,5 +50,6 @@ module.exports = {
             inject: 'body',
             template: './react/template.html',
             filename: './index.html'
-        })]
+        }),
+    ]
 };
