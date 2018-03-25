@@ -1,4 +1,4 @@
-import steamKey from './steamkey';
+import steamKey from './steamkey'; // your own steam key should be exported from ./steamkey.js 
 
 const routes = {
     getAppDetails: 'http://store.steampowered.com/api/appdetails',

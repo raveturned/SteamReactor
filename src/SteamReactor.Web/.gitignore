@@ -2,3 +2,4 @@ node_modules/
 [Bb]in/
 [Oo]bj/
 wwwroot
+api/steamkey.js

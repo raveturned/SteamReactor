@@ -2,10 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-const GLOBALS = {
-    'process.env.NODE_ENV': JSON.stringify('production')
-};
-
 module.exports = {
     entry: ['babel-polyfill', 'whatwg-fetch','./react/index.jsx'],
     target: 'web',
@@ -43,10 +39,8 @@ module.exports = {
             }
         ]
     },
-    devtool: 'source-map',
+    devtool: 'cheap-module-eval-source-map',
     plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.DefinePlugin(GLOBALS),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise',
             fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
@@ -55,8 +49,6 @@ module.exports = {
             inject: 'body',
             template: './react/template.html',
             filename: './index.html'
-        }),        
-        //new ExtractTextPlugin('styles.css'),
-        new webpack.optimize.UglifyJsPlugin()
+        }),
     ]
 };
