@@ -20,6 +20,11 @@ namespace SteamReactor.Web
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory());
+                    config.AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
+                })
                 .Build();
     }
 }

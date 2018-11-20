@@ -1,14 +1,17 @@
 # Roadmap
-
-Can't access SteamAPI in client, because key won't be secure.
- - run a .Net Core web API instead, translate UI needs to Steam API calls
- - can work on demand to start with, slot in a repo later
-   - can we store stuff in memory?
- - need to ensure calls/API key cannot be abused. limit users who we can query
  
 Host in Azure. Use an ARM template for resources.
 
+Need to ensure calls/API key cannot be abused. Limit users who we can query
+
+Put in caching/repo to limit calls to Steam API. Document store?
+
 ## Layout
+
+Initial page asks for steam id or vanity url.
+
+Once we know who we're running as, pull friend list, details of each known user. Then for each user pull app owners, and layout as below:
+
 ### Users
 ```
 /--------------\/--------------\/--------------\/--------------\
@@ -18,12 +21,13 @@ Host in Azure. Use an ARM template for resources.
 | |          | || |          | || |          | || |          | |
 | \----------/ || \----------/ || \----------/ || \----------/ |
 |      Me      ||   Friend 1   ||   Friend 2   ||   Friend 3   |
+|   263 games  ||   74 games   ||     N/A      ||  1035 games  |
 \--------------/\--------------/\--------------/\--------------/
 ```
 ### Games
 
 | Title | Users | Pics |
 |---|---|---|
-| Game 1 | 4 | `P P P P` |
-| Game 2 | 3 | `P P P` |
-| Game 3 | 3 | `P P P` |
+| Game 1 | 3 |  `P P P` |
+| Game 2 | 2 | `P P` |
+| Game 3 | 2 | `P P` |
