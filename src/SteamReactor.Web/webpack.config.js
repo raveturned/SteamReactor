@@ -18,7 +18,7 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/ },
+            { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /(node_modules|bower_components)/ },
             {
                 test: /\.(gif|jp(e)g|png|svg)$/,
                 use: {
