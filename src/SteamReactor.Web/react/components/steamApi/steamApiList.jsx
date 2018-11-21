@@ -19,13 +19,15 @@ class SteamApiList extends React.Component {
     }
 
     render() {
-        const interfaces = ((this.props.interfaces.length > 0) ?
-            this.props.interfaces.map(i => (<SteamApiInterface
-                key={i.name}
-                name={i.name}
-                methods={i.methods}
-            />)) :
-            <div>Please wait...</div>);
+        const interfaces = ((this.props.interfaces.length > 0)
+            ? this.props.interfaces.map(i => (
+                <SteamApiInterface
+                    key={i.name}
+                    name={i.name}
+                    methods={i.methods}
+                />
+            ))
+            : <div>Please wait...</div>);
         return (
             <div className={styles.apiList}>
                 {interfaces}

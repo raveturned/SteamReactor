@@ -11,7 +11,16 @@ const SteamApiMethod = (props) => {
     }).join(', ');
     return (
         <li>
-            {props.httpMethod} http://api.steampowered.com/{props.interfaceName}/{props.name}/v000{props.version}({params})
+            {props.httpMethod}
+            { 'http://api.steampowered.com/' }
+            {props.interfaceName}
+            { '/'}
+            {props.name}
+            { '/v000' }
+            {props.version}
+            { '(' }
+            {params}
+            { ')' }
         </li>
     );
 };

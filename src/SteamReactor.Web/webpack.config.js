@@ -17,7 +17,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /node_modules/ },
             {
                 test: /\.(gif|jp(e)g|png|svg)$/,
@@ -43,13 +43,17 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        minimize: true
+    },
     devtool: 'source-map',
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.DefinePlugin(GLOBALS),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise',
-            fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+            //fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+            fetch: 'exports-loader?self.fetch!whatwg-fetch'
         }),      
         new HtmlWebpackPlugin({
             inject: 'body',
@@ -57,6 +61,6 @@ module.exports = {
             filename: './index.html'
         }),        
         //new ExtractTextPlugin('styles.css'),
-        new webpack.optimize.UglifyJsPlugin()
+        //new webpack.optimize.UglifyJsPlugin()
     ]
 };
