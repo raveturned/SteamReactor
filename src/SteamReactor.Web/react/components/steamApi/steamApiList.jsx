@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import Steam from '../../../api/steam';
 import SteamApiInterface from './steamApiInterface';
 import styles from './styles.css';
 import { fetchInterfaces } from '../../../redux/actions/steamApi';

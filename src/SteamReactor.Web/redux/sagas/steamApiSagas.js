@@ -1,7 +1,9 @@
-import { call, put, takeEvery /* , takeLatest */ } from 'redux-saga/effects';
+import {
+    call, put, takeEvery, takeLatest, all,
+} from 'redux-saga/effects';
 import Steam from '../../api/steam';
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
+// worker Saga: will be fired on FETCH_INTERFACES actions
 function* fetchInterfaces() {
     try {
         const result = yield call(Steam.getSupportedAPIList, { });
@@ -12,24 +14,43 @@ function* fetchInterfaces() {
 }
 
 /*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
+  Starts fetchInterfaces on each dispatched `FETCH_INTERFACES` action.
+  Allows concurrent fetches of interfaces.
 */
-function* mySaga() {
+function* watchInterfaces() {
     yield takeEvery('FETCH_INTERFACES', fetchInterfaces);
 }
 
 /*
   Alternatively you may use takeLatest.
 
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
+  Does not allow concurrent fetches of interfaces. If "FETCH_INTERFACES" gets
   dispatched while a fetch is already pending, that pending fetch is cancelled
   and only the latest one will be run.
 */
 /*
 function* mySaga() {
-    yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
+    yield takeLatest("FETCH_INTERFACES", fetchInterfaces);
 }
 */
 
-export default mySaga;
+// worker Saga: will be fired on FETCH_INTERFACES actions
+function* fetchVanity(action) {
+    try {
+        const result = yield call(Steam.resolveVanityURL, { steamId: action.steamId });
+        yield put({ type: 'FETCH_VANITY_SUCCEEDED', result });
+    } catch (e) {
+        yield put({ type: 'FETCH_VANITY_FAILED', message: e.message });
+    }
+}
+
+function* watchVanity() {
+    yield takeLatest('FETCH_VANITY', fetchVanity);
+}
+
+export default function* rootSaga() {
+    yield all([
+        watchInterfaces(),
+        watchVanity(),
+    ]);
+}

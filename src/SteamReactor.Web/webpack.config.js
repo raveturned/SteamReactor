@@ -52,15 +52,12 @@ module.exports = {
         new webpack.DefinePlugin(GLOBALS),
         new webpack.ProvidePlugin({
             Promise: 'es6-promise',
-            //fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
-            fetch: 'exports-loader?self.fetch!whatwg-fetch'
+            fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd',
         }),      
         new HtmlWebpackPlugin({
             inject: 'body',
             template: './react/template.html',
             filename: './index.html'
-        }),        
-        //new ExtractTextPlugin('styles.css'),
-        //new webpack.optimize.UglifyJsPlugin()
+        }),
     ]
 };

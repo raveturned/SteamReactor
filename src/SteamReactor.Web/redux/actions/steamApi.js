@@ -5,3 +5,7 @@ export function addInterface(i) {
 export function fetchInterfaces() {
     return { type: 'FETCH_INTERFACES' };
 }
+
+export function fetchVanity(steamId) {
+    return { type: 'FETCH_VANITY', steamId };
+}
