@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SteamReactor.Web.Facades;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,53 +16,40 @@ namespace SteamReactor.Web
             _facade = facade;
         }
         
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        [HttpGet("users/{id}")]
-        public JsonResult Get(int id)
-        {
-            return Json(new { id });
-        }
-
         [HttpGet("resolve/{vanityurl}")]
-        public string Resolve(string vanityurl)
+        public async Task<string> Resolve(string vanityurl)
         {
-            return _facade.ResolveVanityUrl(vanityurl).Result;
+            return await _facade.ResolveVanityUrl(vanityurl);
         }
 
         [HttpGet("friends/{steamid}")]
-        public string Friends(long steamid)
+        public async Task<string> Friends(long steamid)
         {
-            return _facade.GetFriendList(steamid).Result;
+            return await _facade.GetFriendList(steamid);
         }
 
         [HttpGet("player/{steamid}")]
-        public string Player(long steamid)
+        public async Task<string> Player(long steamid)
         {
-            return _facade.GetPlayerSummaries(steamid).Result;
+            return await _facade.GetPlayerSummaries(steamid);
         }
 
         [HttpGet("games/{steamid}")]
-        public string Games(long steamid)
+        public async Task<string> Games(long steamid)
         {
-            return _facade.GetOwnedGames(steamid).Result;
+            return await _facade.GetOwnedGames(steamid);
         }
 
         [HttpGet("apps")]
-        public string Apps()
+        public async Task<string> Apps()
         {
-            return _facade.GetAppList().Result;
+            return await _facade.GetAppList();
         }
 
         [HttpGet("api")]
-        public string Api()
+        public async Task<string> Api()
         {
-            return _facade.GetSupportedApisList().Result;
+            return await _facade.GetSupportedApisList();
         }
     }
 }

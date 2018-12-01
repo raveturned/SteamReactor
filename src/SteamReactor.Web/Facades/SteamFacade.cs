@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,7 +12,10 @@ namespace SteamReactor.Web.Facades
 
         public SteamFacade(IConfiguration config)
         {
-            _key = config.GetValue<string>("SteamKey", string.Empty);
+            var key = config.GetValue<string>("SteamApiKey", string.Empty);
+            if (key == string.Empty)
+                throw new ApplicationException("SteamApiKey cannot be empty. Have you set up secrets.json?");
+            _key = key;
         }
 
         private async Task<string> GetUrl(string uri)
