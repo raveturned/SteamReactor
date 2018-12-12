@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchVanity } from '../../../redux/actions/steamApi';
+import UsersHeader from './usersHeader';
 
 class Explorer extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Explorer extends React.Component {
 
     render() {
         const { userId } = this.props;
+        const { users } = this.props;
         const userDetails = (!userId || userId < 0)
             ? (
                 <div>
@@ -33,6 +35,10 @@ class Explorer extends React.Component {
             : (
                 <div>
                     {`User Id is: ${userId}`}
+                    <UsersHeader
+                        ids={users.ids}
+                        byId={users.byId}
+                    />
                 </div>
             );
         return (userDetails);
@@ -41,6 +47,7 @@ class Explorer extends React.Component {
 
 const mapStateToProps = state => ({
     userId: state.explorer.userId,
+    users: state.explorer.users,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,6 +56,10 @@ const mapDispatchToProps = dispatch => ({
 
 Explorer.propTypes = {
     userId: PropTypes.number.isRequired,
+    users: PropTypes.objectOf(PropTypes.shape({
+        ids: PropTypes.arrayOf(PropTypes.long).isRequired,
+        byId: PropTypes.object.isRequired,
+    })).isRequired,
     fetchVanity: PropTypes.func.isRequired,
 };
 

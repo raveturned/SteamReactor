@@ -1,0 +1,12 @@
+.usersHeader {
+    background-color: grey;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.headerUser {
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 5px;
+    display: inline-block;
+}
