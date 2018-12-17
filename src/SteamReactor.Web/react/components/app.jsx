@@ -5,11 +5,9 @@ import styles from './app.css';
 
 const App = () => (
     <div className={styles.app}>
-        {/*
-        <h1>Steam API Methods</h1>
-        <SteamApiList />
-        */}
-        <Explorer />
+        { /* <h1>Steam API Methods</h1> */ }
+        { /* <SteamApiList /> */ }
+        { <Explorer /> }
     </div>
 );
 

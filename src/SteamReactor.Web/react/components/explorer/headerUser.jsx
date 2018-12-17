@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.css';
 
-const HeaderUser = props => (
-    <div className={styles.headerUser}>
-        {`Id: ${props.user.id}`}
-        <br />
-        {`HasDetail: ${props.user.hasDetail}`}
-    </div>
-);
+const HeaderUser = (props) => {
+    const detail = props.user.hasDetail
+        ? (
+            <div className={styles.headerUser}>
+                <img src={props.user.avatarMedium} alt={props.user.name} title={props.user.name} />
+            </div>
+        )
+        : (
+            <div className={styles.headerUser}>
+                {`Id: ${props.user.id}`}
+                <br />
+                {`HasDetail: ${props.user.hasDetail}`}
+            </div>
+        );
+    return detail;
+};
 
 HeaderUser.propTypes = {
     // key: PropTypes.number.isRequired,

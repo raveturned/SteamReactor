@@ -1,12 +1,15 @@
 .usersHeader {
     background-color: grey;
     border-radius: 5px;
-    padding: 5px;
+    padding: 3px;
+    display: flex;
+    overflow-x: auto;
 }
 
 .headerUser {
     background-color: lightgrey;
     border-radius: 5px;
-    padding: 5px;
+    padding: 2px;
+    margin: 2px;
     display: inline-block;
 }

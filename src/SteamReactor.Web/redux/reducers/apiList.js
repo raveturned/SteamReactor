@@ -1,3 +1,5 @@
+import { interfaceActionName } from '../actions/steamApi';
+
 const initialState = {
     interfaces: [],
 };
@@ -8,18 +10,13 @@ export default function apiList(state = initialState, action) {
     }
 
     switch (action.type) {
-    case 'ADD_INTERFACE':
+    case interfaceActionName.ok:
         return {
             ...state,
-            interfaces: [...state.interfaces, action.interface],
+            interfaces: [...action.payload],
         };
-    case 'FETCH_INTERFACES_SUCCEEDED':
-        return {
-            ...state,
-            interfaces: [...action.interfaces],
-        };
-    case 'FETCH_INTERFACES_FAILED': {
-        console.log('FETCH_INTERFACES_FAILED');
+    case interfaceActionName.error: {
+        console.log(interfaceActionName.error);
         console.log(action);
         return state;
     }
