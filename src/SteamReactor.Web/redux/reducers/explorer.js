@@ -1,4 +1,6 @@
-import { vanityActionName, playerActionName, friendsActionName } from '../actions/steamApi';
+import {
+    vanityActionName, playerActionName, friendsActionName, appListActionName,
+} from '../actions/steamApi';
 
 const initialState = {
     userId: -1,
@@ -6,6 +8,7 @@ const initialState = {
         ids: [],
         byId: {},
     },
+    allAppNames: [],
 };
 
 export default function explorer(state = initialState, action) {
@@ -15,7 +18,7 @@ export default function explorer(state = initialState, action) {
 
     switch (action.type) {
     case vanityActionName.ok: {
-        console.log(action);
+        // console.log(action);
         const steamId = action.payload;
         const newState = (state.users.ids.indexOf(steamId) !== -1) ? state
             : {
@@ -41,7 +44,7 @@ export default function explorer(state = initialState, action) {
         return state;
     }
     case playerActionName.ok: {
-        console.log(action);
+        // console.log(action);
         let buildState = state;
         action.payload.forEach((player) => {
             const newPlayer = {
@@ -72,7 +75,7 @@ export default function explorer(state = initialState, action) {
         return state;
     }
     case friendsActionName.ok: {
-        console.log(action);
+        // console.log(action);
         const friends = action.payload;
         let buildState = state;
         friends.forEach((friend) => {
@@ -97,6 +100,19 @@ export default function explorer(state = initialState, action) {
     }
     case friendsActionName.error: {
         console.log(friendsActionName.error);
+        console.log(action);
+        return state;
+    }
+    case appListActionName.ok: {
+        console.log(action);
+        const apps = action.payload;
+        return {
+            ...state,
+            allAppNames: apps,
+        };
+    }
+    case appListActionName.error: {
+        console.log(appListActionName.error);
         console.log(action);
         return state;
     }

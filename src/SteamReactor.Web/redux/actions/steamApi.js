@@ -1,3 +1,9 @@
+export const appListActionName = {
+    error: 'FETCH_APPLIST_ERROR',
+    fetch: 'FETCH_APPLIST',
+    ok: 'FETCH_APPLIST_OK',
+};
+
 export const friendsActionName = {
     error: 'FETCH_FRIENDS_ERROR',
     fetch: 'FETCH_FRIENDS',
@@ -21,6 +27,18 @@ export const playerActionName = {
     fetch: 'FETCH_PLAYER',
     ok: 'FETCH_PLAYER_OK',
 };
+
+export function fetchAppListError(errorMessage) {
+    return { type: appListActionName.error, payload: errorMessage };
+}
+
+export function fetchAppList() {
+    return { type: appListActionName.fetch };
+}
+
+export function fetchAppListOk(apps) {
+    return { type: appListActionName.ok, payload: apps };
+}
 
 export function fetchFriendsError(errorMessage) {
     return { type: friendsActionName.error, payload: errorMessage };

@@ -7,6 +7,7 @@ import {
     interfaceActionName, fetchInterfacesOk, fetchInterfacesError,
     vanityActionName, fetchVanityOk, fetchVanityError,
     playerActionName, fetchPlayer, fetchPlayerOk, fetchPlayerError,
+    appListActionName, fetchAppListOk, fetchAppListError,
 } from '../actions/steamApi';
 
 // interfaces
@@ -57,7 +58,7 @@ function* watchPlayer() {
 
 // friends
 function* fetchFriendsSaga(action) {
-    console.log(action);
+    // console.log(action);
     try {
         const result = yield call(Steam.getFriends, action.payload);
         const { friends } = result.friendslist;
@@ -72,8 +73,26 @@ function* watchFriends() {
     yield takeLatest(friendsActionName.fetch, fetchFriendsSaga);
 }
 
+// appList
+function* fetchAppListSaga(action) {
+    console.log(action);
+    try {
+        const result = yield call(Steam.getAppList);
+        console.log(result);
+        const { apps } = result.applist;
+        yield put(fetchAppListOk(apps));
+    } catch (e) {
+        yield put(fetchAppListError(e.message));
+    }
+}
+
+function* watchAppList() {
+    yield takeLatest(appListActionName.fetch, fetchAppListSaga);
+}
+
 export default function* rootSaga() {
     yield all([
+        watchAppList(),
         watchFriends(),
         watchInterfaces(),
         watchPlayer(),

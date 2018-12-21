@@ -12,7 +12,7 @@ const SteamApiMethod = (props) => {
     return (
         <li>
             {props.httpMethod}
-            { 'http://api.steampowered.com/' }
+            { ' http://api.steampowered.com/' }
             {props.interfaceName}
             { '/'}
             {props.name}

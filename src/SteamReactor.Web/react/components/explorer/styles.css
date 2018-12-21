@@ -13,3 +13,16 @@
     margin: 2px;
     display: inline-block;
 }
+
+.appList {
+    background-color: grey;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.app {
+    background-color: lightgrey;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 2px;
+}

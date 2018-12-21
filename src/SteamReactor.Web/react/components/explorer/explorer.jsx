@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchVanity } from '../../../redux/actions/steamApi';
+import { fetchVanity, fetchAppList } from '../../../redux/actions/steamApi';
 import UsersHeader from './usersHeader';
+import AppList from './appList';
 
 class Explorer extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class Explorer extends React.Component {
     render() {
         const { userId } = this.props;
         const { users } = this.props;
+        const { apps } = this.props;
         const userDetails = (!userId || userId < 0)
             ? (
                 <div>
@@ -39,6 +41,7 @@ class Explorer extends React.Component {
                         ids={users.ids}
                         byId={users.byId}
                     />
+                    <AppList apps={apps} />
                 </div>
             );
         return (userDetails);
@@ -46,15 +49,20 @@ class Explorer extends React.Component {
 }
 
 const mapStateToProps = state => ({
+    apps: [], // state.explorer.allAppNames,
     userId: state.explorer.userId,
     users: state.explorer.users,
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchVanity: steamId => dispatch(fetchVanity(steamId)),
+    fetchVanity: (steamId) => {
+        dispatch(fetchVanity(steamId));
+        dispatch(fetchAppList());
+    },
 });
 
 Explorer.propTypes = {
+    apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     userId: PropTypes.number.isRequired,
     users: PropTypes.objectOf(PropTypes.shape({
         ids: PropTypes.arrayOf(PropTypes.long).isRequired,
