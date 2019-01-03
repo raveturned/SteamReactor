@@ -36,8 +36,8 @@ class Explorer extends React.Component {
             )
             : (
                 <div>
-                    {`User Id is: ${userId}`}
                     <UsersHeader
+                        currentUserId={userId}
                         ids={users.ids}
                         byId={users.byId}
                     />
@@ -65,7 +65,7 @@ Explorer.propTypes = {
     apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     userId: PropTypes.number.isRequired,
     users: PropTypes.objectOf(PropTypes.shape({
-        ids: PropTypes.arrayOf(PropTypes.long).isRequired,
+        ids: PropTypes.arrayOf(PropTypes.number).isRequired,
         byId: PropTypes.object.isRequired,
     })).isRequired,
     fetchVanity: PropTypes.func.isRequired,
