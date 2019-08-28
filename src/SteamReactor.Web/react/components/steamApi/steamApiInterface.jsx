@@ -15,7 +15,8 @@ const SteamApiInterface = props => (
                     version={m.version}
                     parameters={m.parameters}
                     httpMethod={m.httpmethod}
-                />))}
+                />
+            ))}
         </ul>
     </div>
 );
