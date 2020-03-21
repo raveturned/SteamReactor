@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper';
 
 import CurrentUser from './currentUser';
 import HeaderUser from './headerUser';
-// import styles from './styles.css';
 
 const useStyles = makeStyles(() => ({
   root: {

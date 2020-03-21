@@ -5,8 +5,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
-// import styles from './styles.css';
-
 const useStyles = makeStyles(() => ({
   root: {
     display: 'inline-block',
