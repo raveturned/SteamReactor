@@ -3,8 +3,8 @@ import apiList from './apiList';
 import explorer from './explorer';
 
 const rootReducer = combineReducers({
-    apiList,
-    explorer,
+  apiList,
+  explorer,
 });
 
 export default rootReducer;

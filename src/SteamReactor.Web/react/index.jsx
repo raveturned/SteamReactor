@@ -14,8 +14,8 @@ const store = configureStore(initialState, sagaMiddleware);
 sagaMiddleware.run(mySaga);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-    document.getElementById('root'), // eslint-disable-line no-undef
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'), // eslint-disable-line no-undef
 );

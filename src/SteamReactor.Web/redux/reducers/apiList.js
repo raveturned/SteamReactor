@@ -1,26 +1,26 @@
 import { interfaceActionName } from '../actions/steamApi';
 
 const initialState = {
-    interfaces: [],
+  interfaces: [],
 };
 
 export default function apiList(state = initialState, action) {
-    if (typeof state === 'undefined') {
-        return initialState;
-    }
+  if (typeof state === 'undefined') {
+    return initialState;
+  }
 
-    switch (action.type) {
+  switch (action.type) {
     case interfaceActionName.ok:
-        return {
-            ...state,
-            interfaces: [...action.payload],
-        };
+      return {
+        ...state,
+        interfaces: [...action.payload],
+      };
     case interfaceActionName.error: {
-        console.log(interfaceActionName.error);
-        console.log(action);
-        return state;
+      console.log(interfaceActionName.error);
+      console.log(action);
+      return state;
     }
     default:
-        return state;
-    }
+      return state;
+  }
 }
