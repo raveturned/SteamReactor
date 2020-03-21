@@ -63,7 +63,7 @@ function* fetchFriendsSaga(action) {
         const result = yield call(Steam.getFriends, action.payload);
         const { friends } = result.friendslist;
         yield put(fetchFriendsOk(friends));
-        yield all(friends.map(friend => put(fetchPlayer(friend.steamid))));
+        yield all(friends.map((friend) => put(fetchPlayer(friend.steamid))));
     } catch (e) {
         yield put(fetchFriendsError(e.message));
     }

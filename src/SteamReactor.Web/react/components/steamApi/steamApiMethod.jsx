@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SteamApiMethod = (props) => {
-    const params = props.parameters.map((p) => {
+const SteamApiMethod = ({
+    parameters,
+    httpMethod,
+    interfaceName,
+    name,
+    version,
+}) => {
+    const params = parameters.map((p) => {
         let result = `${p.type} ${p.name}`;
         if (p.optional) {
             result = `[${result}]`;
@@ -11,7 +17,7 @@ const SteamApiMethod = (props) => {
     }).join(', ');
     return (
         <li>
-            {`${props.httpMethod} http://api.steampowered.com/${props.interfaceName}/${props.name}/v000${props.version}/(${params})`}
+            {`${httpMethod} http://api.steampowered.com/${interfaceName}/${name}/v000${version}/(${params})`}
         </li>
     );
 };

@@ -6,6 +6,6 @@ module.exports = {
         "indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "no-undef": 0,
-        "react/destructuring-assignment": "never"
+        // "react/destructuring-assignment": "never"
     }    
 };

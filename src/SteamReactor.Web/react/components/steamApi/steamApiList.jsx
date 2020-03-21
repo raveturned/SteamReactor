@@ -14,12 +14,14 @@ class SteamApiList extends React.Component {
     */
 
     componentDidMount() {
-        this.props.fetchInterfaces();
+        const { fetchInterfaces: getInterfaces } = this.props;
+        getInterfaces();
     }
 
     render() {
-        const interfaces = ((this.props.interfaces.length > 0)
-            ? this.props.interfaces.map(i => (
+        const { interfaces } = this.props;
+        const renderInterfaces = ((interfaces.length > 0)
+            ? interfaces.map((i) => (
                 <SteamApiInterface
                     key={i.name}
                     name={i.name}
@@ -29,17 +31,17 @@ class SteamApiList extends React.Component {
             : <div>Please wait...</div>);
         return (
             <div className={styles.apiList}>
-                {interfaces}
+                {renderInterfaces}
             </div>
         );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     interfaces: state.apiList.interfaces,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     fetchInterfaces: () => dispatch(fetchInterfaces()),
 });
 

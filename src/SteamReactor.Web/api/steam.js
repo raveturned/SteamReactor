@@ -9,14 +9,14 @@ const routes = {
 };
 
 const delayTime = 0; // 1000;
-const delayPromise = ms => new Promise(r => setTimeout(r, ms));
+const delayPromise = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function getSupportedAPIList() {
     const uri = routes.getSupportedAPIList;
     const args = {};
 
     return fetch(uri, args)
-        .then(response => response.json());
+        .then((response) => response.json());
 }
 
 function resolveVanityURL(vanityUrl) {
@@ -24,7 +24,7 @@ function resolveVanityURL(vanityUrl) {
     const args = {};
 
     return fetch(uri, args)
-        .then(response => response.json());
+        .then((response) => response.json());
 }
 
 function getPlayer(steamId) {
@@ -32,7 +32,7 @@ function getPlayer(steamId) {
     const args = {};
 
     return fetch(uri, args)
-        .then(response => response.json());
+        .then((response) => response.json());
 }
 
 function getFriends(steamId) {
@@ -40,7 +40,7 @@ function getFriends(steamId) {
     const args = {};
 
     return fetch(uri, args)
-        .then(response => response.json());
+        .then((response) => response.json());
 }
 
 function getAppList() {
@@ -48,16 +48,16 @@ function getAppList() {
     const args = {};
 
     return fetch(uri, args)
-        .then(response => response.json());
+        .then((response) => response.json());
 }
 
 const steam = {
     getSupportedAPIList: () => delayPromise(delayTime).then(() => getSupportedAPIList()),
-    resolveVanityURL: payload => delayPromise(delayTime)
+    resolveVanityURL: (payload) => delayPromise(delayTime)
         .then(() => resolveVanityURL(payload)),
-    getPlayer: payload => delayPromise(delayTime)
+    getPlayer: (payload) => delayPromise(delayTime)
         .then(() => getPlayer(payload)),
-    getFriends: payload => delayPromise(delayTime)
+    getFriends: (payload) => delayPromise(delayTime)
         .then(() => getFriends(payload)),
     getAppList: () => delayPromise(delayTime)
         .then(() => getAppList()),

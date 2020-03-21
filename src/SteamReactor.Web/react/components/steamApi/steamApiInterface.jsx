@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import SteamApiMethod from './steamApiMethod';
 import styles from './styles.css';
 
-const SteamApiInterface = props => (
+const SteamApiInterface = ({ name, methods }) => (
     <div className={styles.apiInterface}>
-        {props.name}
+        {name}
         <ul>
-            {props.methods.map(m => (
+            {methods.map((m) => (
                 <SteamApiMethod
-                    key={`${props.name} ${m.name} ${m.version}`}
+                    key={`${name} ${m.name} ${m.version}`}
                     name={m.name}
-                    interfaceName={props.name}
+                    interfaceName={name}
                     version={m.version}
                     parameters={m.parameters}
                     httpMethod={m.httpmethod}

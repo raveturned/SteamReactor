@@ -4,24 +4,23 @@ import CurrentUser from './currentUser';
 import HeaderUser from './headerUser';
 import styles from './styles.css';
 
-const UsersHeader = props => (
+const UsersHeader = ({ byId, currentUserId, ids }) => (
     <div className={styles.header}>
         <CurrentUser
-            user={props.byId[props.currentUserId]}
+            user={byId[currentUserId]}
         />
         <div className={styles.usersHeader}>
-            {props.ids
-                .filter(id => (id !== props.currentUserId))
+            {ids
+                .filter((id) => (id !== currentUserId))
                 .map((id) => {
-                    const user = props.byId[id];
+                    const user = byId[id];
                     return (
                         <HeaderUser
                             id={id}
                             user={user}
                         />
                     );
-                })
-            }
+                })}
         </div>
     </div>
 );

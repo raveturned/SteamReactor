@@ -18,19 +18,20 @@ class Explorer extends React.Component {
     }
 
     submitVanity() {
-        console.log(`A vanity URL was submitted: ${this.state.vanity}`);
-        this.props.fetchVanity(this.state.vanity);
+        const { vanity } = this.state;
+        const { callFetchVanity } = this.props;
+        console.log(`A vanity URL was submitted: ${vanity}`);
+        callFetchVanity(vanity);
     }
 
     render() {
-        const { userId } = this.props;
-        const { users } = this.props;
-        const { apps } = this.props;
+        const { apps, userId, users } = this.props;
+        const { vanity } = this.state;
         const userDetails = (!userId || userId < 0)
             ? (
                 <div>
                     {'Enter vanity URL: '}
-                    <input value={this.state.vanity} onChange={this.handleVanityChange} />
+                    <input value={vanity} onChange={this.handleVanityChange} />
                     <button type="button" onClick={this.submitVanity}>Fetch</button>
                 </div>
             )
@@ -48,14 +49,14 @@ class Explorer extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
     apps: [], // state.explorer.allAppNames,
     userId: state.explorer.userId,
     users: state.explorer.users,
 });
 
-const mapDispatchToProps = dispatch => ({
-    fetchVanity: (steamId) => {
+const mapDispatchToProps = (dispatch) => ({
+    callFetchVanity: (steamId) => {
         dispatch(fetchVanity(steamId));
         dispatch(fetchAppList());
     },
@@ -68,7 +69,7 @@ Explorer.propTypes = {
         ids: PropTypes.arrayOf(PropTypes.number).isRequired,
         byId: PropTypes.object.isRequired,
     })).isRequired,
-    fetchVanity: PropTypes.func.isRequired,
+    callFetchVanity: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Explorer);
