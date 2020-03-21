@@ -1,23 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
 
-const CurrentUser = (props) => {
-  const detail = props.user.hasDetail ? (
-    <div className={styles.headerUser}>
-      <img src={props.user.avatarFull} alt={props.user.name} title={props.user.name} />
-      <div>
-        {props.user.name}
-      </div>
-    </div>
-  ) : (
-    <div className={styles.headerUser}>
-      {`Id: ${props.user.id}`}
-      <br />
-      {`HasDetail: ${props.user.hasDetail}`}
-    </div>
+// import styles from './styles.css';
+
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'inline-block',
+    minWidth: 184,
+  },
+  large: {
+    width: 184,
+    height: 184,
+  },
+}));
+
+const CurrentUser = ({ user }) => {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root}>
+      <Avatar
+        src={user.avatarFull}
+        alt={user.name}
+        title={user.name}
+        variant="rounded"
+        className={classes.large}
+      />
+      <Typography>{user.hasDetail ? user.name : user.id}</Typography>
+    </Card>
   );
-  return detail;
 };
 
 CurrentUser.propTypes = {

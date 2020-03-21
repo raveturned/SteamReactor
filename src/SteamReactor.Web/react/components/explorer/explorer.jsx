@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 import { fetchVanity, fetchAppList } from '../../../redux/actions/steamApi';
 import UsersHeader from './usersHeader';
 import AppList from './appList';
@@ -29,21 +32,20 @@ class Explorer extends React.Component {
     const { vanity } = this.state;
     const userDetails = (!userId || userId < 0)
       ? (
-        <div>
-          {'Enter vanity URL: '}
-          <input value={vanity} onChange={this.handleVanityChange} />
-          <button type="button" onClick={this.submitVanity}>Fetch</button>
-        </div>
+        <>
+          <TextField label="Vanity URL" value={vanity} onChange={this.handleVanityChange} />
+          <Button variant="contained" color="primary" onClick={this.submitVanity}>Fetch</Button>
+        </>
       )
       : (
-        <div>
+        <>
           <UsersHeader
             currentUserId={userId}
             ids={users.ids}
             byId={users.byId}
           />
           <AppList apps={apps} />
-        </div>
+        </>
       );
     return (userDetails);
   }

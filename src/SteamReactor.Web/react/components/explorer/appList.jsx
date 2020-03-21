@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.css';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 const AppList = ({ apps }) => (
-  <div className={styles.appList}>
+  <Paper>
     {apps.map((app) => (
-      <div className={styles.app}>
-        {app.name}
-      </div>
+      <Typography>{app.name}</Typography>
     ))}
-  </div>
+  </Paper>
 );
 
 AppList.propTypes = {
