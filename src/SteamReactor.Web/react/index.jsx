@@ -13,7 +13,6 @@ const store = configureStore(initialState, sagaMiddleware);
 // then run the saga
 sagaMiddleware.run(mySaga);
 
-
 ReactDOM.render(
     <Provider store={store}>
         <App />
