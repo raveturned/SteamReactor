@@ -30,7 +30,7 @@ class Explorer extends React.Component {
   render() {
     const { apps, userId, users } = this.props;
     const { vanity } = this.state;
-    const userDetails = (!userId || userId < 0)
+    return (!userId || userId < 0)
       ? (
         <>
           <TextField label="Vanity URL" value={vanity} onChange={this.handleVanityChange} />
@@ -47,7 +47,6 @@ class Explorer extends React.Component {
           <AppList apps={apps} />
         </>
       );
-    return (userDetails);
   }
 }
 

@@ -1,22 +1,33 @@
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
 import SteamApiList from './steamApi/steamApiList';
 import Explorer from './explorer/explorer';
-import styles from './app.css';
 
 const App = () => {
   const api = false;
-  const content = api ? (
-    <div>
-      <h1>Steam API Methods</h1>
-      <SteamApiList />
-    </div>
-  ) : (
-    <Explorer />
-  );
+
+  const themeObject = {};
+  if (!api) {
+    themeObject.palette = {
+      type: 'dark',
+    };
+  }
+  const theme = createMuiTheme(themeObject);
+
   return (
-    <div className={styles.app}>
-      { content }
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      { api ? (
+        <div>
+          <h1>Steam API Methods</h1>
+          <SteamApiList />
+        </div>
+      ) : (
+        <Explorer />
+      )}
+    </ThemeProvider>
   );
 };
 

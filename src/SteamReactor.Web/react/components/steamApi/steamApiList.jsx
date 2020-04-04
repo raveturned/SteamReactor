@@ -6,13 +6,6 @@ import styles from './styles.css';
 import { fetchInterfaces } from '../../../redux/actions/steamApi';
 
 class SteamApiList extends React.Component {
-  /*
-    constructor(props) {
-        super(props);
-        this.state = { interfaces: [] };
-    }
-    */
-
   componentDidMount() {
     const { fetchInterfaces: getInterfaces } = this.props;
     getInterfaces();
