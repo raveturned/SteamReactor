@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 const routes = {
   // getAppDetails: 'http://store.steampowered.com/api/appdetails',
   getAppList: '/api/steam/apps',
@@ -15,7 +17,7 @@ function getSupportedAPIList() {
   const uri = routes.getSupportedAPIList;
   const args = {};
 
-  return fetch(uri, args)
+  return window.fetch(uri, args)
     .then((response) => response.json());
 }
 
@@ -23,7 +25,7 @@ function resolveVanityURL(vanityUrl) {
   const uri = `${routes.resolveVanityURL}/${vanityUrl}`;
   const args = {};
 
-  return fetch(uri, args)
+  return window.fetch(uri, args)
     .then((response) => response.json());
 }
 
@@ -31,7 +33,7 @@ function getPlayer(steamId) {
   const uri = `${routes.getPlayer}/${steamId}`;
   const args = {};
 
-  return fetch(uri, args)
+  return window.fetch(uri, args)
     .then((response) => response.json());
 }
 
@@ -39,7 +41,7 @@ function getFriends(steamId) {
   const uri = `${routes.getFriends}/${steamId}`;
   const args = {};
 
-  return fetch(uri, args)
+  return window.fetch(uri, args)
     .then((response) => response.json());
 }
 
@@ -47,7 +49,7 @@ function getAppList() {
   const uri = `${routes.getAppList}`;
   const args = {};
 
-  return fetch(uri, args)
+  return window.fetch(uri, args)
     .then((response) => response.json());
 }
 

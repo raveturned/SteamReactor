@@ -29,6 +29,7 @@ const UsersHeader = ({ byId, currentUserId, ids }) => {
             const user = byId[id];
             return (
               <HeaderUser
+                key={id}
                 id={id}
                 user={user}
               />
@@ -40,8 +41,8 @@ const UsersHeader = ({ byId, currentUserId, ids }) => {
 };
 
 UsersHeader.propTypes = {
-  currentUserId: PropTypes.number.isRequired,
-  ids: PropTypes.arrayOf(PropTypes.number).isRequired,
+  currentUserId: PropTypes.string.isRequired,
+  ids: PropTypes.arrayOf(PropTypes.string).isRequired,
   byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };
 

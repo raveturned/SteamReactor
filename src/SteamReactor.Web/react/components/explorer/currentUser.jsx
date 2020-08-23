@@ -34,10 +34,12 @@ const CurrentUser = ({ user }) => {
 };
 
 CurrentUser.propTypes = {
-  user: PropTypes.objectOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     hasDetail: PropTypes.bool.isRequired,
-  })).isRequired,
+    avatarFull: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default CurrentUser;

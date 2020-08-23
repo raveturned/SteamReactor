@@ -65,11 +65,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 Explorer.propTypes = {
   apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  userId: PropTypes.number.isRequired,
-  users: PropTypes.objectOf(PropTypes.shape({
-    ids: PropTypes.arrayOf(PropTypes.number).isRequired,
-    byId: PropTypes.object.isRequired,
-  })).isRequired,
+  userId: PropTypes.string.isRequired,
+  users: PropTypes.shape({
+    ids: PropTypes.arrayOf(PropTypes.string).isRequired,
+    byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  }).isRequired,
   callFetchVanity: PropTypes.func.isRequired,
 };
 

@@ -3,7 +3,7 @@ import {
 } from '../actions/steamApi';
 
 const initialState = {
-  userId: -1,
+  userId: '',
   users: {
     ids: [],
     byId: {},
@@ -20,7 +20,7 @@ export default function explorer(state = initialState, action) {
     case vanityActionName.ok: {
       // console.log(action);
       const steamId = action.payload;
-      const newState = (state.users.ids.indexOf(steamId) !== -1) ? state
+      const newState = (state.users.ids.indexOf(steamId) > 0) ? state
         : {
           ...state,
           userId: steamId,
@@ -80,7 +80,7 @@ export default function explorer(state = initialState, action) {
       let buildState = state;
       friends.forEach((friend) => {
         const steamId = friend.steamid;
-        buildState = (buildState.users.ids.indexOf(steamId) !== -1) ? buildState
+        buildState = (buildState.users.ids.indexOf(steamId) > 0) ? buildState
           : {
             ...buildState,
             users: {

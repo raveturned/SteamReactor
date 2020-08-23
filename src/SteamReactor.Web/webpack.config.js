@@ -7,7 +7,11 @@ const GLOBALS = {
 };
 
 module.exports = {
-  entry: ['babel-polyfill', 'whatwg-fetch', './react/index.jsx'],
+  entry: [
+    'babel-polyfill',
+    'whatwg-fetch',
+    './react/index.jsx'
+  ],
   target: 'web',
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -16,9 +20,16 @@ module.exports = {
     path: path.resolve(__dirname, 'wwwroot'),
     filename: 'bundle.js',
   },
+  mode: 'production',
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, loaders: ['babel-loader', 'eslint-loader'], exclude: /(node_modules|bower_components)/ },
+      {
+        test: /\.(js|jsx)$/,
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'eslint-loader' }
+        ],
+        exclude: /(node_modules|bower_components)/ },
       {
         test: /\.(gif|jp(e)g|png|svg)$/,
         use: {
@@ -49,11 +60,11 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(), //?
     new webpack.DefinePlugin(GLOBALS),
     new webpack.ProvidePlugin({
       Promise: 'es6-promise',
-      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd',
+      fetch: 'whatwg-fetch',
     }),
     new HtmlWebpackPlugin({
       inject: 'body',
