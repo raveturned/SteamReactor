@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Card from '@material-ui/core/Card';
+// import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'inline-block',
-    minWidth: 184,
+    display: 'flex',
   },
-  large: {
-    width: 184,
-    height: 184,
+  image: {
+    width: 48,
+    height: 48,
+  },
+  name: {
+    padding: theme.spacing(1.5),
   },
 }));
 
@@ -20,16 +22,16 @@ const CurrentUser = ({ user }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <div className={classes.root}>
       <Avatar
-        src={user.avatarFull}
+        src={user.avatarMedium}
         alt={user.name}
         title={user.name}
-        variant="rounded"
-        className={classes.large}
+        // variant="rounded"
+        className={classes.image}
       />
-      <Typography>{user.hasDetail ? user.name : user.id}</Typography>
-    </Card>
+      <Typography className={classes.name}>{user.hasDetail ? user.name : user.id}</Typography>
+    </div>
   );
 };
 
@@ -37,7 +39,7 @@ CurrentUser.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.string.isRequired,
     hasDetail: PropTypes.bool.isRequired,
-    avatarFull: PropTypes.string,
+    avatarMedium: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
 };

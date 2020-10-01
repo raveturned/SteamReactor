@@ -1,17 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import { fetchVanity, fetchAppList } from '../../../redux/actions/steamApi';
-import UsersHeader from './usersHeader';
-import AppList from './appList';
+import Header from './header';
+import Main from './main';
+
+const styles = (theme) => ({
+  header: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+});
 
 class Explorer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { vanity: '' };
+    this.state = {
+      vanity: '',
+    };
     this.handleVanityChange = this.handleVanityChange.bind(this);
     this.submitVanity = this.submitVanity.bind(this);
   }
@@ -28,8 +37,15 @@ class Explorer extends React.Component {
   }
 
   render() {
-    const { apps, userId, users } = this.props;
-    const { vanity } = this.state;
+    const {
+      classes,
+      apps,
+      userId,
+      users,
+    } = this.props;
+    const {
+      vanity,
+    } = this.state;
     return (!userId || userId < 0)
       ? (
         <>
@@ -39,12 +55,16 @@ class Explorer extends React.Component {
       )
       : (
         <>
-          <UsersHeader
+          <Header
+            internalClass={classes.header}
             currentUserId={userId}
-            ids={users.ids}
             byId={users.byId}
           />
-          <AppList apps={apps} />
+          <Main
+            apps={apps}
+            byId={users.byId}
+            friendIds={users.ids.filter((id) => (id !== userId))}
+          />
         </>
       );
   }
@@ -71,6 +91,9 @@ Explorer.propTypes = {
     byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
   }).isRequired,
   callFetchVanity: PropTypes.func.isRequired,
+  classes: PropTypes.shape({
+    header: PropTypes.string,
+  }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Explorer);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Explorer));
