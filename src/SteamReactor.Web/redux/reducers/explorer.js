@@ -1,5 +1,5 @@
 import {
-  vanityActionName, playerActionName, friendsActionName, appListActionName,
+  vanityActionName, playerActionName, friendsActionName, appListActionName, selectFriendAction,
 } from '../actions/steamApi';
 
 const initialState = {
@@ -9,6 +9,7 @@ const initialState = {
     byId: {},
   },
   allAppNames: [],
+  selectedUsers: [],
 };
 
 export default function explorer(state = initialState, action) {
@@ -115,6 +116,17 @@ export default function explorer(state = initialState, action) {
       console.log(appListActionName.error);
       console.log(action);
       return state;
+    }
+    case selectFriendAction: {
+      const steamId = action.payload;
+      const index = state.selectedUsers.findIndex((u) => u === steamId);
+      return {
+        ...state,
+        selectedUsers: index < 0
+          ? [...state.selectedUsers, steamId]
+          : state.selectedUsers.filter((u) => u !== steamId),
+
+      };
     }
     default:
       return state;

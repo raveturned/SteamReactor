@@ -28,6 +28,12 @@ export const playerActionName = {
   ok: 'FETCH_PLAYER_OK',
 };
 
+export const selectFriendAction = 'SELECT_FRIEND';
+
+export function selectFriend(steamId) {
+  return { type: selectFriendAction, payload: steamId };
+}
+
 export function fetchAppListError(errorMessage) {
   return { type: appListActionName.error, payload: errorMessage };
 }

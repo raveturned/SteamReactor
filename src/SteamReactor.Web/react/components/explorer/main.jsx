@@ -13,7 +13,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Main = ({ apps, byId, friendIds }) => {
+const Main = ({
+  apps, byId, friendIds, selectedUsers, toggleFriendSelect,
+}) => {
   const classes = useStyles();
   return (
     <div>
@@ -24,7 +26,9 @@ const Main = ({ apps, byId, friendIds }) => {
         <Toolbar />
         <FriendList
           friendIds={friendIds}
+          selectedUsers={selectedUsers}
           byId={byId}
+          toggleSelect={toggleFriendSelect}
         />
       </Drawer>
       <AppList apps={apps} />
@@ -33,9 +37,11 @@ const Main = ({ apps, byId, friendIds }) => {
 };
 
 Main.propTypes = {
+  toggleFriendSelect: PropTypes.func.isRequired,
   apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
   friendIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Main;

@@ -4,7 +4,7 @@ const routes = {
   // getAppDetails: 'http://store.steampowered.com/api/appdetails',
   getAppList: '/api/steam/apps',
   getFriends: '/api/steam/friends',
-  // getOwnedGames: 'http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/',
+  getOwnedGames: '/api/steam/games',
   getPlayer: '/api/steam/player',
   getSupportedAPIList: '/api/steam/api',
   resolveVanityURL: '/api/steam/resolve',
@@ -53,8 +53,17 @@ function getAppList() {
     .then((response) => response.json());
 }
 
+function getOwnedGames(steamId) {
+  const uri = `${routes.getOwnedGames}/${steamId}`;
+  const args = {};
+
+  return window.fetch(uri, args)
+    .then((response) => response.json());
+}
+
 const steam = {
-  getSupportedAPIList: () => delayPromise(delayTime).then(() => getSupportedAPIList()),
+  getSupportedAPIList: () => delayPromise(delayTime)
+    .then(() => getSupportedAPIList()),
   resolveVanityURL: (payload) => delayPromise(delayTime)
     .then(() => resolveVanityURL(payload)),
   getPlayer: (payload) => delayPromise(delayTime)
@@ -63,6 +72,8 @@ const steam = {
     .then(() => getFriends(payload)),
   getAppList: () => delayPromise(delayTime)
     .then(() => getAppList()),
+  getOwnedGames: (payload) => delayPromise(delayTime)
+    .then(() => getOwnedGames(payload)),
 };
 
 export default steam;

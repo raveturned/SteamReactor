@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-import { fetchVanity, fetchAppList } from '../../../redux/actions/steamApi';
+import { fetchVanity, fetchAppList, selectFriend } from '../../../redux/actions/steamApi';
 import Header from './header';
 import Main from './main';
 
@@ -32,7 +32,6 @@ class Explorer extends React.Component {
   submitVanity() {
     const { vanity } = this.state;
     const { callFetchVanity } = this.props;
-    console.log(`A vanity URL was submitted: ${vanity}`);
     callFetchVanity(vanity);
   }
 
@@ -42,6 +41,8 @@ class Explorer extends React.Component {
       apps,
       userId,
       users,
+      selectedUsers,
+      toggleFriendSelect,
     } = this.props;
     const {
       vanity,
@@ -64,6 +65,8 @@ class Explorer extends React.Component {
             apps={apps}
             byId={users.byId}
             friendIds={users.ids.filter((id) => (id !== userId))}
+            selectedUsers={selectedUsers}
+            toggleFriendSelect={toggleFriendSelect}
           />
         </>
       );
@@ -74,12 +77,16 @@ const mapStateToProps = (state) => ({
   apps: [], // state.explorer.allAppNames,
   userId: state.explorer.userId,
   users: state.explorer.users,
+  selectedUsers: state.explorer.selectedUsers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   callFetchVanity: (steamId) => {
     dispatch(fetchVanity(steamId));
     dispatch(fetchAppList());
+  },
+  toggleFriendSelect: (steamId) => {
+    dispatch(selectFriend(steamId));
   },
 });
 
@@ -90,7 +97,9 @@ Explorer.propTypes = {
     ids: PropTypes.arrayOf(PropTypes.string).isRequired,
     byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
   }).isRequired,
+  selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
   callFetchVanity: PropTypes.func.isRequired,
+  toggleFriendSelect: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     header: PropTypes.string,
   }).isRequired,

@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const onClick = ((id) => { alert(id); });
-
-const FriendList = ({ friendIds, byId }) => {
+const FriendList = ({
+  friendIds, selectedUsers, byId, toggleSelect,
+}) => {
   const classes = useStyles();
   return (
     <List className={classes.headerUsers} dense>
@@ -25,8 +25,9 @@ const FriendList = ({ friendIds, byId }) => {
         return (
           <ListItem
             button
-            onClick={() => onClick(id)}
+            onClick={() => toggleSelect(id)}
             key={id}
+            selected={selectedUsers.includes(id)}
           >
             <Friend
               key={id}
@@ -41,7 +42,9 @@ const FriendList = ({ friendIds, byId }) => {
 };
 
 FriendList.propTypes = {
+  toggleSelect: PropTypes.func.isRequired,
   friendIds: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
   byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };
 
