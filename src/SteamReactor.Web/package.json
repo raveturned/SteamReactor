@@ -6,7 +6,7 @@
         "build:watch": "npm run prebuild && webpack --config=webpack.config.dev.js --watch=true",
         "release-build": "webpack --watch=true",
         "clean-wwwroot": "npm run remove-wwwroot && mkdir wwwroot",
-        "remove-wwwroot": "node_modules/.bin/rimraf ./wwwroot",
+        "remove-wwwroot": ".\\node_modules\\.bin\\rimraf .\\wwwroot",
         "prebuild": "npm run clean-wwwroot",
         "build": "webpack",
         "watch": "webpack --watch"
@@ -30,19 +30,19 @@
         "babel-loader": "^8.1.0",
         "babel-plugin-es6-promise": "^1.1.1",
         "babel-polyfill": "^6.26.0",
-        "css-loader": "^4.3.0",
+        "css-loader": "^5.2.6",
         "eslint": "^7.10.0",
         "eslint-config-airbnb": "^18.2.0",
-        "eslint-loader": "^4.0.2",
         "eslint-plugin-import": "^2.22.1",
         "eslint-plugin-jsx-a11y": "^6.3.1",
         "eslint-plugin-react": "^7.21.2",
         "eslint-plugin-react-hooks": "^4.1.2",
+        "eslint-webpack-plugin": "^2.5.4",
         "file-loader": "^6.1.0",
-        "html-webpack-plugin": "^4.5.0",
+        "html-webpack-plugin": "^5.3.1",
         "path": "^0.12.7",
-        "style-loader": "^1.2.1",
-        "webpack": "^4.44.2",
-        "webpack-cli": "^3.3.12"
+        "style-loader": "^2.0.0",
+        "webpack": "^5.38.1",
+        "webpack-cli": "^4.7.0"
     }
 }

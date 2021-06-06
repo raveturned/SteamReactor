@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
@@ -23,17 +24,12 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: [
                     { loader: 'babel-loader' },
-                    { loader: 'eslint-loader' }
                 ],
-                exclude: /node_modules/ },
+                exclude: /node_modules/
+            },
             {
                 test: /\.(gif|jp(e)g|png|svg)$/,
-                use: {
-                    loader: "file-loader",
-                    options: {
-                    name: "images/[name].[hash].[ext]",
-                    },
-                },
+                type: 'asset/resource'
             },
             {
                 test: /\.css$/,
@@ -43,7 +39,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: '[name]__[local]___[hash:base64:5]',
+                                localIdentName: '[name]__[local]___[contenthash:base64:5]',
                             },
                         },
                     },
@@ -62,5 +58,6 @@ module.exports = {
             template: './react/template.html',
             filename: './index.html'
         }),
-    ]
+        new ESLintPlugin(),
+    ],
 };
