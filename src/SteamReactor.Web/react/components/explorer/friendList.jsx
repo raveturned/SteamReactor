@@ -7,10 +7,11 @@ import ListItem from '@material-ui/core/ListItem';
 import Friend from './friend';
 
 const useStyles = makeStyles((theme) => ({
-  headerUsers: {
+  listUsers: {
     display: 'block',
     passing: theme.spacing(1),
-    width: 192,
+    width: 224,
+    overflowY: 'auto',
   },
 }));
 
@@ -19,7 +20,7 @@ const FriendList = ({
 }) => {
   const classes = useStyles();
   return (
-    <List className={classes.headerUsers} dense>
+    <List className={classes.listUsers} dense>
       {friendIds.map((id) => {
         const user = byId[id];
         return (

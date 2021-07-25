@@ -11,7 +11,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'whatwg-fetch',
-    './react/index.jsx'
+    './react/index.jsx',
   ],
   target: 'web',
   resolve: {
@@ -29,11 +29,12 @@ module.exports = {
         use: [
           { loader: 'babel-loader' },
         ],
-        exclude: /(node_modules|bower_components)/ },
+        exclude: /(node_modules|bower_components)/,
+      },
       {
         test: /\.(gif|jp(e)g|png|svg)$/,
-        type: 'asset/resource'
-      },      
+        type: 'asset/resource',
+      },
       {
         test: /\.css$/,
         use: [

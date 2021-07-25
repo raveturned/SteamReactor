@@ -2,12 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
 import { fetchVanity, fetchAppList, selectFriend } from '../../../redux/actions/steamApi';
 import Header from './header';
 import Main from './main';
+import VanitySelector from './vanitySelector';
 
 const styles = (theme) => ({
   header: {
@@ -49,10 +48,11 @@ class Explorer extends React.Component {
     } = this.state;
     return (!userId || userId < 0)
       ? (
-        <>
-          <TextField label="Vanity URL" value={vanity} onChange={this.handleVanityChange} />
-          <Button variant="contained" color="primary" onClick={this.submitVanity}>Fetch</Button>
-        </>
+        <VanitySelector
+          handleVanityChange={this.handleVanityChange}
+          submitVanity={this.submitVanity}
+          vanity={vanity}
+        />
       )
       : (
         <>
@@ -74,7 +74,7 @@ class Explorer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  apps: [], // state.explorer.allAppNames,
+  apps: [],
   userId: state.explorer.userId,
   users: state.explorer.users,
   selectedUsers: state.explorer.selectedUsers,
