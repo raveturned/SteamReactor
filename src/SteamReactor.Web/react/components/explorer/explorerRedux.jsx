@@ -90,7 +90,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-Explorer.propTypes = {
+ExplorerRedux.propTypes = {
   apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   userId: PropTypes.string.isRequired,
   users: PropTypes.shape({

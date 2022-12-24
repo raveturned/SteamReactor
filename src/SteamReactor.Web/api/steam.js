@@ -11,7 +11,9 @@ const routes = {
 };
 
 const delayTime = 0; // 1000;
-const delayPromise = (ms) => new Promise((r) => setTimeout(r, ms));
+const delayPromise = (ms) => new Promise((r) => {
+  setTimeout(r, ms);
+});
 
 function getSupportedAPIList() {
   const uri = routes.getSupportedAPIList;
