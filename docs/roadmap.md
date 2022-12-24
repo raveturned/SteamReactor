@@ -1,10 +1,8 @@
 # Roadmap
  
-Host in Azure. Use an ARM template for resources.
-
 Need to ensure calls/API key cannot be abused. Limit users who we can query
 
-Put in caching/repo to limit calls to Steam API. Document store?
+Put in caching/repo to limit calls to Steam API.
 
 ## Layout
 
@@ -31,3 +29,10 @@ Once we know who we're running as, pull friend list, details of each known user.
 | Game 1 | 3 |  `P P P` |
 | Game 2 | 2 | `P P` |
 | Game 3 | 2 | `P P` |
+
+## ToDo
+ - move towards hooks
+ - move away from sagas, maybe away from redux
+ - consider: containerising?
+ - consider: splitting facades from frontend? (separate concerns)
+ - consider: using as a test bed for k8s, service discovery

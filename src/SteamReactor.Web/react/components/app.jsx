@@ -7,7 +7,7 @@ import SteamApiList from './steamApi/steamApiList';
 import SteamApiListRedux from './steamApi/steamApiListRedux';
 
 const App = () => {
-  const api = true;
+  const api = false;
   const useRedux = false;
 
   const themeObject = {};
