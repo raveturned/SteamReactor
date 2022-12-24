@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,43 +14,31 @@ const styles = (theme) => ({
   },
 });
 
-class ExplorerRedux extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      vanity: '',
-    };
-    this.handleVanityChange = this.handleVanityChange.bind(this);
-    this.submitVanity = this.submitVanity.bind(this);
-  }
+const ExplorerRedux = ({
+  classes,
+  apps,
+  userId,
+  users,
+  selectedUsers,
+  toggleFriendSelect,
+  callFetchVanity,
+}) => {
+  const [vanity, setVanity] = useState('');
 
-  handleVanityChange(event) {
-    this.setState({ vanity: event.target.value });
-  }
+  const handleVanityChange = (event) => {
+    setVanity(event.target.value);
+  };
 
-  submitVanity() {
-    const { vanity } = this.state;
-    const { callFetchVanity } = this.props;
+  const submitVanity = () => {
     callFetchVanity(vanity);
-  }
+  };
 
-  render() {
-    const {
-      classes,
-      apps,
-      userId,
-      users,
-      selectedUsers,
-      toggleFriendSelect,
-    } = this.props;
-    const {
-      vanity,
-    } = this.state;
-    return (!userId || userId < 0)
+  return (
+    (!userId || userId < 0)
       ? (
         <VanitySelector
-          handleVanityChange={this.handleVanityChange}
-          submitVanity={this.submitVanity}
+          handleVanityChange={handleVanityChange}
+          submitVanity={submitVanity}
           vanity={vanity}
         />
       )
@@ -69,9 +57,9 @@ class ExplorerRedux extends React.Component {
             toggleFriendSelect={toggleFriendSelect}
           />
         </>
-      );
-  }
-}
+      )
+  );
+};
 
 const mapStateToProps = (state) => ({
   apps: [],

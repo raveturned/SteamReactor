@@ -58,6 +58,8 @@ module.exports = {
       template: './react/template.html',
       filename: './index.html',
     }),
-    new ESLintPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'jsx'],
+    }),
   ],
 };
