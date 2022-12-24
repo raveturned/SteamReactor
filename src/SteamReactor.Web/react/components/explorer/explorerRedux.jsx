@@ -14,7 +14,7 @@ const styles = (theme) => ({
   },
 });
 
-class Explorer extends React.Component {
+class ExplorerRedux extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -105,4 +105,4 @@ Explorer.propTypes = {
   }).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Explorer));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ExplorerRedux));

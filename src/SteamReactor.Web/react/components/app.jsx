@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import SteamApiList from './steamApi/steamApiList';
-import Explorer from './explorer/explorer';
+import ExplorerRedux from './explorer/explorerRedux';
 
 const App = () => {
   const api = false;
@@ -25,7 +25,7 @@ const App = () => {
           <SteamApiList />
         </div>
       ) : (
-        <Explorer />
+        <ExplorerRedux />
       )}
     </ThemeProvider>
   );
