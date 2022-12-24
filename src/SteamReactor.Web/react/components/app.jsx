@@ -1,6 +1,6 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import SteamApiList from './steamApi/steamApiList';
 import Explorer from './explorer/explorer';
@@ -14,7 +14,7 @@ const App = () => {
       type: 'dark',
     };
   }
-  const theme = createMuiTheme(themeObject);
+  const theme = createTheme(themeObject);
 
   return (
     <ThemeProvider theme={theme}>

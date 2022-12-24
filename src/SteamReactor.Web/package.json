@@ -3,8 +3,8 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "build:watch": "npm run prebuild && webpack --config=webpack.config.dev.js --watch=true",
-        "release-build": "webpack --watch=true",
+        "build:watch": "npm run prebuild && webpack --config=webpack.config.dev.js --watch",
+        "release-build": "webpack --watch",
         "clean-wwwroot": "npm run remove-wwwroot && mkdir wwwroot",
         "remove-wwwroot": ".\\node_modules\\.bin\\rimraf .\\wwwroot",
         "prebuild": "npm run clean-wwwroot",

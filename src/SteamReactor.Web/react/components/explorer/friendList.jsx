@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   listUsers: {
     display: 'block',
     passing: theme.spacing(1),
-    width: 224,
+    width: 240,
     overflowY: 'auto',
   },
 }));
