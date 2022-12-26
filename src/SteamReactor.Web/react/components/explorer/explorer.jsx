@@ -15,12 +15,6 @@ const styles = (theme) => ({
 
 const Explorer = ({
   classes,
-  // apps,
-  // userId,
-  // users,
-  // selectedUsers,
-  // toggleFriendSelect,
-  // callFetchVanity,
 }) => {
   const [allAppNames, setAllAppNames] = useState([]);
   const [vanity, setVanity] = useState('');
