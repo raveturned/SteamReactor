@@ -6,7 +6,11 @@ import Typography from '@material-ui/core/Typography';
 const AppList = ({ apps }) => (
   <Paper>
     {apps.map((app) => (
-      <Typography>{app.name}</Typography>
+      <Typography
+        key={app.appid}
+      >
+        {app.name}
+      </Typography>
     ))}
   </Paper>
 );
