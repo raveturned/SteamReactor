@@ -15,8 +15,8 @@
         "@material-ui/core": "^4.12.4",
         "es6-promise": "^4.2.8",
         "prop-types": "^15.8.1",
-        "react": "^16.14.0",
-        "react-dom": "^16.14.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
         "whatwg-fetch": "^3.6.2"
     },
     "devDependencies": {
@@ -28,8 +28,8 @@
         "babel-plugin-es6-promise": "^1.1.1",
         "babel-polyfill": "^6.26.0",
         "css-loader": "^6.7.3",
-        "eslint": "^7.32.0",
-        "eslint-config-airbnb": "^18.2.1",
+        "eslint": "^8.30.0",
+        "eslint-config-airbnb": "^19.0.4",
         "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-jsx-a11y": "^6.6.1",
         "eslint-plugin-react": "^7.31.11",
