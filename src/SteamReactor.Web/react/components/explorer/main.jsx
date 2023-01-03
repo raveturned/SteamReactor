@@ -1,40 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
+import { Box, Toolbar } from '@mui/material';
 
 import AppList from './appList';
 import FriendList from './friendList';
 
-const useStyles = makeStyles(() => ({
-  drawer: {
-    width: 196,
-  },
-}));
-
 const Main = ({
   apps, byId, friendIds, selectedUsers, toggleFriendSelect,
-}) => {
-  const classes = useStyles();
-  return (
-    <div>
-      <Drawer
-        variant="permanent"
-        className={classes.drawer}
-      >
-        <Toolbar />
-        <FriendList
-          friendIds={friendIds}
-          selectedUsers={selectedUsers}
-          byId={byId}
-          toggleSelect={toggleFriendSelect}
-        />
-      </Drawer>
-      <AppList apps={apps} />
-    </div>
-  );
-};
+}) => (
+  <Box>
+    <Toolbar />
+    <FriendList
+      friendIds={friendIds}
+      selectedUsers={selectedUsers}
+      byId={byId}
+      toggleSelect={toggleFriendSelect}
+    />
+    <AppList apps={apps} />
+  </Box>
+);
 
 Main.propTypes = {
   toggleFriendSelect: PropTypes.func.isRequired,

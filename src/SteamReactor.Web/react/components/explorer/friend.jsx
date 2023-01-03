@@ -1,39 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Avatar, Chip } from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(1),
-  },
-  avatar: {
-    height: 32,
-    width: 32,
-  },
-  label: {
-    padding: theme.spacing(0.5),
-  },
-}));
-
-const Friend = ({ user, hideLabel }) => {
-  const classes = useStyles();
-  const userLabel = user.name || user.id;
+const Friend = ({ user, selected, toggleSelect }) => {
+  const userLabel = user.name || '';
+  const userTitle = user.name || user.id;
   return (
-    <>
-      <ListItemAvatar>
+    <Chip
+      avatar={(
         <Avatar
           src={user.avatar}
-          alt={userLabel}
-          title={userLabel}
-          // variant="rounded"
-          className={classes.avatar}
+          alt={userTitle}
+          title={userTitle}
+          sx={{ width: 32, height: 32 }}
         />
-      </ListItemAvatar>
-      {!hideLabel && <ListItemText primary={userLabel} /> }
-    </>
+      )}
+      label={userLabel}
+      variant={selected ? 'default' : 'outlined'}
+      onClick={() => toggleSelect(user.id)}
+    />
   );
 };
 
@@ -44,11 +29,11 @@ Friend.propTypes = {
     avatar: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
-  hideLabel: PropTypes.bool,
+  selected: PropTypes.bool.isRequired,
+  toggleSelect: PropTypes.func.isRequired,
 };
 
 Friend.defaultProps = {
-  hideLabel: false,
 };
 
 export default Friend;

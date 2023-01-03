@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import { AppBar, Toolbar } from '@mui/material';
 
 import CurrentUser from './currentUser';
 
-const Header = ({ internalClass, byId, currentUserId }) => (
-  <AppBar position="fixed" className={internalClass}>
+const Header = ({ byId, currentUserId }) => (
+  <AppBar
+    position="fixed"
+  >
     <Toolbar>
       <CurrentUser
         user={byId[currentUserId]}
@@ -16,7 +17,6 @@ const Header = ({ internalClass, byId, currentUserId }) => (
 );
 
 Header.propTypes = {
-  internalClass: PropTypes.string.isRequired,
   currentUserId: PropTypes.string.isRequired,
   byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };

@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 
 import Header from './header';
 import Main from './main';
 import VanitySelector from './vanitySelector';
 import Steam from '../../../api/steam';
 
-const styles = (theme) => ({
-  header: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-});
-
-const Explorer = ({
-  classes,
-}) => {
+const Explorer = () => {
   const [allAppNames, setAllAppNames] = useState([]);
   const [vanity, setVanity] = useState('');
   const [userId, setUserId] = useState('');
@@ -110,6 +100,8 @@ const Explorer = ({
     });
   };
 
+  const appList = allAppNames.slice(0, 10) ?? [];
+
   return (
     (!userId || userId < 0)
       ? (
@@ -122,12 +114,11 @@ const Explorer = ({
       : (
         <>
           <Header
-            internalClass={classes.header}
             currentUserId={userId}
             byId={userList.byId}
           />
           <Main
-            apps={allAppNames.slice(0, 10) ?? []}
+            apps={appList}
             byId={userList.byId}
             friendIds={userList.ids.filter((id) => (id !== userId))}
             selectedUsers={selectedUsers}
@@ -139,9 +130,6 @@ const Explorer = ({
 };
 
 Explorer.propTypes = {
-  classes: PropTypes.shape({
-    header: PropTypes.string,
-  }).isRequired,
 };
 
-export default withStyles(styles)(Explorer);
+export default Explorer;

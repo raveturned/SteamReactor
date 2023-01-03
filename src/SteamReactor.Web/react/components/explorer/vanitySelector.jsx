@@ -1,25 +1,28 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { Box, Button, TextField } from '@mui/material';
 
-const useStyles = makeStyles(() => ({
-  vanitySelector: {
-    padding: '1rem',
-    display: 'flex',
-  },
-}));
-
-const VanitySelector = ({ handleVanityChange, submitVanity, vanity }) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.vanitySelector}>
-      <TextField label="Vanity URL" value={vanity} onChange={handleVanityChange} />
-      <Button variant="contained" color="primary" onClick={submitVanity}>Fetch</Button>
-    </div>
-  );
-};
+const VanitySelector = ({ handleVanityChange, submitVanity, vanity }) => (
+  <Box
+    sx={{
+      display: 'flex',
+    }}
+  >
+    <TextField
+      label="Vanity URL"
+      value={vanity}
+      onChange={handleVanityChange}
+      sx={{ margin: 1 }}
+    />
+    <Button
+      variant="contained"
+      onClick={submitVanity}
+      sx={{ margin: 1 }}
+    >
+      Fetch
+    </Button>
+  </Box>
+);
 
 VanitySelector.defaultProps = {
   vanity: '',

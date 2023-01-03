@@ -31,8 +31,10 @@ Once we know who we're running as, pull friend list, details of each known user.
 | Game 3 | 2 | `P P` |
 
 ## ToDo
- - move towards hooks
- - move away from sagas, maybe away from redux
+ - make usable??
+   - make friendlist more friendly
+   - get additional player info (e.g. games owned)
+   - make applist depend on selected friends and their apps
  - consider: containerising?
  - consider: splitting facades from frontend? (separate concerns)
  - consider: using as a test bed for k8s, service discovery

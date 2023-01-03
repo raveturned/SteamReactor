@@ -1,6 +1,10 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import {
+  createTheme,
+  ThemeProvider,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 
 import Explorer from './explorer/explorer';
 import SteamApiList from './steamApi/steamApiList';
@@ -11,23 +15,25 @@ const App = () => {
   const themeObject = {};
   if (!api) {
     themeObject.palette = {
-      type: 'dark',
+      mode: 'dark',
     };
   }
   const theme = createTheme(themeObject);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      { api ? (
-        <div>
-          <h1>Steam API Methods</h1>
-          <SteamApiList />
-        </div>
-      ) : (
-        <Explorer />
-      )}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        { api ? (
+          <div>
+            <h1>Steam API Methods</h1>
+            <SteamApiList />
+          </div>
+        ) : (
+          <Explorer />
+        )}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 
