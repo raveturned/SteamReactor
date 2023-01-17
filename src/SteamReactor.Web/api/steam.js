@@ -15,53 +15,53 @@ const delayPromise = (ms) => new Promise((r) => {
   setTimeout(r, ms);
 });
 
-function getSupportedAPIList() {
+const getSupportedAPIList = () => {
   const uri = routes.getSupportedAPIList;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
-function resolveVanityURL(vanityUrl) {
+const resolveVanityURL = (vanityUrl) => {
   const uri = `${routes.resolveVanityURL}/${vanityUrl}`;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
-function getPlayerSummary(steamId) {
+const getPlayerSummary = (steamId) => {
   const uri = `${routes.getPlayerSummary}/${steamId}`;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
-function getFriends(steamId) {
+const getFriends = (steamId) => {
   const uri = `${routes.getFriends}/${steamId}`;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
-function getAppList() {
+const getAppList = () => {
   const uri = `${routes.getAppList}`;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
-function getOwnedGames(steamId) {
+const getOwnedGames = (steamId) => {
   const uri = `${routes.getOwnedGames}/${steamId}`;
   const args = {};
 
   return window.fetch(uri, args)
     .then((response) => response.json());
-}
+};
 
 const steam = {
   getSupportedAPIList: () => delayPromise(delayTime)
