@@ -24,8 +24,7 @@ const Friend = ({ user, selected, toggleSelect }) => {
 
 Friend.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    hasDetail: PropTypes.bool.isRequired,
+    id: PropTypes.string,
     avatar: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,

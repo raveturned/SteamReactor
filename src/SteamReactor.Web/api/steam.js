@@ -5,7 +5,7 @@ const routes = {
   getAppList: '/api/steam/apps',
   getFriends: '/api/steam/friends',
   getOwnedGames: '/api/steam/games',
-  getPlayer: '/api/steam/player',
+  getPlayerSummary: '/api/steam/player-summary',
   getSupportedAPIList: '/api/steam/api',
   resolveVanityURL: '/api/steam/resolve',
 };
@@ -31,8 +31,8 @@ function resolveVanityURL(vanityUrl) {
     .then((response) => response.json());
 }
 
-function getPlayer(steamId) {
-  const uri = `${routes.getPlayer}/${steamId}`;
+function getPlayerSummary(steamId) {
+  const uri = `${routes.getPlayerSummary}/${steamId}`;
   const args = {};
 
   return window.fetch(uri, args)
@@ -68,8 +68,8 @@ const steam = {
     .then(() => getSupportedAPIList()),
   resolveVanityURL: (payload) => delayPromise(delayTime)
     .then(() => resolveVanityURL(payload)),
-  getPlayer: (payload) => delayPromise(delayTime)
-    .then(() => getPlayer(payload)),
+  getPlayerSummary: (payload) => delayPromise(delayTime)
+    .then(() => getPlayerSummary(payload)),
   getFriends: (payload) => delayPromise(delayTime)
     .then(() => getFriends(payload)),
   getAppList: () => delayPromise(delayTime)

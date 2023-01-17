@@ -27,8 +27,8 @@ namespace SteamReactor.Web
             return await _facade.GetFriendList(steamid);
         }
 
-        [HttpGet("player/{steamid}")]
-        public async Task<string> Player(long steamid)
+        [HttpGet("player-summary/{steamid}")]
+        public async Task<string> PlayerSummary(long steamid)
         {
             return await _facade.GetPlayerSummaries(steamid);
         }

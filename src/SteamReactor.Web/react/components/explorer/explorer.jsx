@@ -9,10 +9,8 @@ const Explorer = () => {
   const [allAppNames, setAllAppNames] = useState([]);
   const [vanity, setVanity] = useState('');
   const [userId, setUserId] = useState('');
-  const [userList, setUserList] = useState({
-    ids: [],
-    byId: {},
-  });
+  const [friendIds, setFriendIds] = useState([]);
+  const [playerSummaries, setPlayerSummaries] = useState({});
   const [selectedUsers, setSelectedUsers] = useState([]);
 
   const handleVanityChange = (event) => {
@@ -26,40 +24,24 @@ const Explorer = () => {
   };
 
   const fetchPlayer = async (steamId) => {
-    const result = await Steam.getPlayer(steamId);
+    const result = await Steam.getPlayerSummary(steamId);
     const { players } = result.response;
     players.forEach((player) => {
       const newPlayer = {
         id: player.steamid,
-        hasDetail: true,
         name: player.personaname,
         avatar: player.avatar,
         avatarFull: player.avatarfull,
         avatarMedium: player.avatarmedium,
       };
-      setUserList((users) => ({
-        ...users,
-        byId: {
-          ...users.byId,
-          [newPlayer.id]: newPlayer,
-        },
+      setPlayerSummaries((prevState) => ({
+        ...prevState,
+        [newPlayer.id]: newPlayer,
       }));
     });
   };
 
   const addNewUser = (id) => {
-    setUserList((users) => ({
-      ...users,
-      byId: {
-        ...users.byId,
-        [id]: {
-          id,
-          hasDetail: false,
-        },
-      },
-      ids: [...users.ids, id],
-    }));
-
     // fetch player detail
     fetchPlayer(id);
   };
@@ -68,9 +50,12 @@ const Explorer = () => {
     const result = await Steam.getFriends(id);
     const { friends } = result.friendslist;
 
+    const mapSteamId = (friend) => friend.steamid;
+
+    setFriendIds(friends.map(mapSteamId));
+
     friends.forEach((friend) => {
-      const steamId = friend.steamid;
-      addNewUser(steamId);
+      addNewUser(mapSteamId(friend));
     });
   };
 
@@ -103,7 +88,7 @@ const Explorer = () => {
   const appList = allAppNames.slice(0, 10) ?? [];
 
   return (
-    (!userId || userId < 0)
+    (!userId)
       ? (
         <VanitySelector
           handleVanityChange={handleVanityChange}
@@ -115,12 +100,12 @@ const Explorer = () => {
         <>
           <Header
             currentUserId={userId}
-            byId={userList.byId}
+            playerSummaries={playerSummaries}
           />
           <Main
             apps={appList}
-            byId={userList.byId}
-            friendIds={userList.ids.filter((id) => (id !== userId))}
+            friendIds={friendIds}
+            playerSummaries={playerSummaries}
             selectedUsers={selectedUsers}
             toggleFriendSelect={toggleFriendSelect}
           />

@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 import Friend from './friend';
 
 const FriendList = ({
-  friendIds, selectedUsers, byId, toggleSelect,
+  friendIds, selectedUsers, playerSummaries, toggleSelect,
 }) => (
   <Box
     sx={{
@@ -13,7 +13,7 @@ const FriendList = ({
     }}
   >
     {friendIds.map((id) => {
-      const user = byId[id];
+      const user = playerSummaries[id] || {};
       return (
         <Friend
           key={id}
@@ -31,7 +31,7 @@ FriendList.propTypes = {
   toggleSelect: PropTypes.func.isRequired,
   friendIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  playerSummaries: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };
 
 export default FriendList;

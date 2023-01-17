@@ -6,24 +6,32 @@ import AppList from './appList';
 import FriendList from './friendList';
 
 const Main = ({
-  apps, byId, friendIds, selectedUsers, toggleFriendSelect,
-}) => (
-  <Box>
-    <Toolbar />
-    <FriendList
-      friendIds={friendIds}
-      selectedUsers={selectedUsers}
-      byId={byId}
-      toggleSelect={toggleFriendSelect}
-    />
-    <AppList apps={apps} />
-  </Box>
-);
+  apps,
+  playerSummaries,
+  friendIds,
+  selectedUsers,
+  toggleFriendSelect,
+}) => {
+  console.log('whatever');
+
+  return (
+    <Box>
+      <Toolbar />
+      <FriendList
+        friendIds={friendIds}
+        selectedUsers={selectedUsers}
+        playerSummaries={playerSummaries}
+        toggleSelect={toggleFriendSelect}
+      />
+      <AppList apps={apps} />
+    </Box>
+  );
+};
 
 Main.propTypes = {
   toggleFriendSelect: PropTypes.func.isRequired,
   apps: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  byId: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  playerSummaries: PropTypes.objectOf(PropTypes.shape()).isRequired,
   friendIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

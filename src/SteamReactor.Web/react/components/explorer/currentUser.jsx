@@ -8,22 +8,24 @@ const Root = styled('div')(() => ({
   display: 'flex',
 }));
 
-const CurrentUser = ({ user }) => (
-  <Root>
-    <Avatar
-      src={user.avatarMedium}
-      alt={user.name}
-      title={user.name}
-      sx={{ width: 48, height: 48 }}
-    />
-    <Typography sx={{ padding: 1.5 }}>{user.hasDetail ? user.name : user.id}</Typography>
-  </Root>
-);
+const CurrentUser = ({ user }) => {
+  const displayName = user.name ?? 'Loading...';
+  return (
+    <Root>
+      <Avatar
+        src={user.avatarMedium}
+        alt={displayName}
+        title={displayName}
+        sx={{ width: 48, height: 48 }}
+      />
+      <Typography sx={{ padding: 1.5 }}>{displayName}</Typography>
+    </Root>
+  );
+};
 
 CurrentUser.propTypes = {
   user: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    hasDetail: PropTypes.bool.isRequired,
+    id: PropTypes.string,
     avatarMedium: PropTypes.string,
     name: PropTypes.string,
   }).isRequired,
