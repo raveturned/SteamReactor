@@ -1,37 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Button, TextField } from '@mui/material';
 
-const VanitySelector = ({ handleVanityChange, submitVanity, vanity }) => (
-  <Box
-    sx={{
-      display: 'flex',
-    }}
-  >
-    <TextField
-      label="Vanity URL"
-      value={vanity}
-      onChange={handleVanityChange}
-      sx={{ margin: 1 }}
-    />
-    <Button
-      variant="contained"
-      onClick={submitVanity}
-      sx={{ margin: 1 }}
-    >
-      Fetch
-    </Button>
-  </Box>
-);
+const VanitySelector = ({ submitVanity }) => {
+  const [vanity, setVanity] = useState('');
 
-VanitySelector.defaultProps = {
-  vanity: '',
+  const handleVanityChange = (event) => {
+    setVanity(event.target.value);
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+      }}
+    >
+      <TextField
+        label="Vanity URL"
+        value={vanity}
+        onChange={handleVanityChange}
+        sx={{ margin: 1 }}
+      />
+      <Button
+        variant="contained"
+        onClick={() => submitVanity(vanity)}
+        sx={{ margin: 1 }}
+      >
+        Fetch
+      </Button>
+    </Box>
+  );
 };
 
 VanitySelector.propTypes = {
-  handleVanityChange: PropTypes.func.isRequired,
   submitVanity: PropTypes.func.isRequired,
-  vanity: PropTypes.string,
 };
 
 export default VanitySelector;

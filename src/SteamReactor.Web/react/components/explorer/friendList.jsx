@@ -5,7 +5,10 @@ import { Box } from '@mui/material';
 import Friend from './friend';
 
 const FriendList = ({
-  friendIds, selectedUsers, playerSummaries, toggleSelect,
+  friendIds,
+  selectedUsers,
+  playerSummaries,
+  toggleSelect,
 }) => (
   <Box
     sx={{

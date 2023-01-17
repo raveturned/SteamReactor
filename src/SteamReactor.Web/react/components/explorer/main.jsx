@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Toolbar } from '@mui/material';
 
 import AppList from './appList';
 import FriendList from './friendList';
@@ -11,22 +10,17 @@ const Main = ({
   friendIds,
   selectedUsers,
   toggleFriendSelect,
-}) => {
-  console.log('whatever');
-
-  return (
-    <Box>
-      <Toolbar />
-      <FriendList
-        friendIds={friendIds}
-        selectedUsers={selectedUsers}
-        playerSummaries={playerSummaries}
-        toggleSelect={toggleFriendSelect}
-      />
-      <AppList apps={apps} />
-    </Box>
-  );
-};
+}) => (
+  <>
+    <FriendList
+      friendIds={friendIds}
+      selectedUsers={selectedUsers}
+      playerSummaries={playerSummaries}
+      toggleSelect={toggleFriendSelect}
+    />
+    <AppList apps={apps} />
+  </>
+);
 
 Main.propTypes = {
   toggleFriendSelect: PropTypes.func.isRequired,

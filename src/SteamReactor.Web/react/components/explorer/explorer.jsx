@@ -7,15 +7,10 @@ import Steam from '../../../api/steam';
 
 const Explorer = () => {
   const [allAppNames, setAllAppNames] = useState([]);
-  const [vanity, setVanity] = useState('');
   const [userId, setUserId] = useState('');
   const [friendIds, setFriendIds] = useState([]);
   const [playerSummaries, setPlayerSummaries] = useState({});
   const [selectedUsers, setSelectedUsers] = useState([]);
-
-  const handleVanityChange = (event) => {
-    setVanity(event.target.value);
-  };
 
   const fetchAppList = async () => {
     const result = await Steam.getAppList();
@@ -61,7 +56,15 @@ const Explorer = () => {
 
   const resolveVanity = async (name) => {
     const result = await Steam.resolveVanityURL(name);
-    const steamId = result.response.steamid;
+    const {
+      steamid: steamId,
+      message,
+    } = result.response;
+
+    if (!steamId) {
+      console.warn(`No user found with name ${name}.${message ? ` Message was: '${message}'` : ''}`);
+      return;
+    }
 
     // add user id, and fetch detail
     addNewUser(steamId);
@@ -71,7 +74,7 @@ const Explorer = () => {
     setUserId(steamId);
   };
 
-  const submitVanity = () => {
+  const submitVanity = (vanity) => {
     resolveVanity(vanity);
     fetchAppList();
   };
@@ -91,17 +94,14 @@ const Explorer = () => {
     (!userId)
       ? (
         <VanitySelector
-          handleVanityChange={handleVanityChange}
           submitVanity={submitVanity}
-          vanity={vanity}
         />
       )
       : (
-        <>
-          <Header
-            currentUserId={userId}
-            playerSummaries={playerSummaries}
-          />
+        <Header
+          currentUserId={userId}
+          playerSummaries={playerSummaries}
+        >
           <Main
             apps={appList}
             friendIds={friendIds}
@@ -109,7 +109,7 @@ const Explorer = () => {
             selectedUsers={selectedUsers}
             toggleFriendSelect={toggleFriendSelect}
           />
-        </>
+        </Header>
       )
   );
 };
