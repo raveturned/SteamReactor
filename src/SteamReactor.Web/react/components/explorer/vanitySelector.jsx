@@ -19,6 +19,11 @@ const VanitySelector = ({ submitVanity }) => {
         label="Vanity URL"
         value={vanity}
         onChange={handleVanityChange}
+        onKeyDown={({ key }) => {
+          if (key === 'Enter') {
+            submitVanity(vanity);
+          }
+        }}
         sx={{ margin: 1 }}
       />
       <Button

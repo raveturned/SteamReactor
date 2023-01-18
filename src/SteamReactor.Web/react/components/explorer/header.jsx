@@ -5,8 +5,7 @@ import { AppBar, Box, Toolbar } from '@mui/material';
 import CurrentUser from './currentUser';
 
 const Header = ({
-  playerSummaries,
-  currentUserId,
+  currentUser,
   children,
 }) => (
   <>
@@ -15,7 +14,7 @@ const Header = ({
     >
       <Toolbar>
         <CurrentUser
-          user={playerSummaries[currentUserId] || {}}
+          user={currentUser}
         />
       </Toolbar>
     </AppBar>
@@ -27,8 +26,11 @@ const Header = ({
 );
 
 Header.propTypes = {
-  currentUserId: PropTypes.string.isRequired,
-  playerSummaries: PropTypes.objectOf(PropTypes.shape()).isRequired,
+  currentUser: PropTypes.shape({
+    id: PropTypes.string,
+    avatarMedium: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
   children: PropTypes.node.isRequired,
 };
 

@@ -80,11 +80,11 @@ const Explorer = () => {
   };
 
   const toggleFriendSelect = (id) => {
-    setSelectedUsers((list) => {
-      const index = list.indexOf(id);
+    setSelectedUsers((prevState) => {
+      const index = prevState.indexOf(id);
       return (index < 0)
-        ? [...list, id]
-        : list.filter((u) => u !== id);
+        ? [...prevState, id]
+        : prevState.filter((u) => u !== id);
     });
   };
 
@@ -99,8 +99,7 @@ const Explorer = () => {
       )
       : (
         <Header
-          currentUserId={userId}
-          playerSummaries={playerSummaries}
+          currentUser={playerSummaries[userId] || {}}
         >
           <Main
             apps={appList}
