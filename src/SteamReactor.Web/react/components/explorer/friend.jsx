@@ -1,24 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, Chip } from '@mui/material';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import UserAvatar from './userAvatar';
+
+const FlexDiv = styled('div')(() => ({
+  display: 'flex',
+  alignItems: 'center',
+}));
 
 const Friend = ({ user, selected, toggleSelect }) => {
-  const userLabel = user.name || '';
-  const userTitle = user.name || user.id;
+  const userLabel = user.name || 'Loading...';
   return (
-    <Chip
-      avatar={(
-        <Avatar
-          src={user.avatar}
-          alt={userTitle}
-          title={userTitle}
-          sx={{ width: 32, height: 32 }}
-        />
-      )}
-      label={userLabel}
-      variant={selected ? 'default' : 'outlined'}
-      onClick={() => toggleSelect(user.id)}
-    />
+    <Card
+      sx={{
+        width: 260, m: 1,
+      }}
+      raised={selected}
+      // variant="normal"
+    >
+      <CardActionArea onClick={() => toggleSelect(user.id)}>
+        <CardContent>
+          <FlexDiv>
+            <UserAvatar user={user} />
+            <Typography sx={{ px: 1 }}>
+              {userLabel}
+            </Typography>
+          </FlexDiv>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 };
 

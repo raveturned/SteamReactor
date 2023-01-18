@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 
+import { Container } from '@mui/material';
 import Header from './header';
-import Main from './main';
+import PartySelector from './partySelector';
 import VanitySelector from './vanitySelector';
 import Steam from '../../../api/steam';
+import helpers from '../../../api/helpers';
 
 const Explorer = () => {
-  const [allAppNames, setAllAppNames] = useState([]);
-  const [userId, setUserId] = useState('');
+  const [currentUserId, setCurrentUserId] = useState('');
   const [friendIds, setFriendIds] = useState([]);
   const [playerSummaries, setPlayerSummaries] = useState({});
+  const [partyMemberIds, setPartyMemberIds] = useState([]);
   const [selectedUsers, setSelectedUsers] = useState([]);
+  // const [allAppNames, setAllAppNames] = useState([]);
 
   const fetchAppList = async () => {
+    /*
     const result = await Steam.getAppList();
     const { apps } = result.applist;
     setAllAppNames(apps);
+    */
   };
 
-  const fetchPlayer = async (steamId) => {
+  const fetchPlayerSummary = async (steamId) => {
     const result = await Steam.getPlayerSummary(steamId);
     const { players } = result.response;
     players.forEach((player) => {
@@ -28,17 +33,17 @@ const Explorer = () => {
         avatar: player.avatar,
         avatarFull: player.avatarfull,
         avatarMedium: player.avatarmedium,
+        visibilityState: {
+          id: player.communityvisibilitystate,
+          name: helpers.getVisibilityStateName(player.communityvisibilitystate),
+        },
+        ...player, // todo: remove when we have all we need
       };
       setPlayerSummaries((prevState) => ({
         ...prevState,
         [newPlayer.id]: newPlayer,
       }));
     });
-  };
-
-  const addNewUser = (id) => {
-    // fetch player detail
-    fetchPlayer(id);
   };
 
   const fetchFriends = async (id) => {
@@ -50,7 +55,7 @@ const Explorer = () => {
     setFriendIds(friends.map(mapSteamId));
 
     friends.forEach((friend) => {
-      addNewUser(mapSteamId(friend));
+      fetchPlayerSummary(mapSteamId(friend));
     });
   };
 
@@ -66,12 +71,9 @@ const Explorer = () => {
       return;
     }
 
-    // add user id, and fetch detail
-    addNewUser(steamId);
-    // fetch friend list
+    fetchPlayerSummary(steamId);
     fetchFriends(steamId);
-    // set userId
-    setUserId(steamId);
+    setCurrentUserId(steamId);
   };
 
   const submitVanity = (vanity) => {
@@ -88,28 +90,35 @@ const Explorer = () => {
     });
   };
 
-  const appList = allAppNames.slice(0, 10) ?? [];
+  // const appList = allAppNames.slice(0, 10) ?? [];
 
   return (
-    (!userId)
-      ? (
-        <VanitySelector
-          submitVanity={submitVanity}
-        />
-      )
-      : (
-        <Header
-          currentUser={playerSummaries[userId] || {}}
-        >
-          <Main
-            apps={appList}
-            friendIds={friendIds}
-            playerSummaries={playerSummaries}
-            selectedUsers={selectedUsers}
-            toggleFriendSelect={toggleFriendSelect}
+    <Container>
+      {(!currentUserId)
+        ? (
+          <VanitySelector
+            submitVanity={submitVanity}
           />
-        </Header>
-      )
+        )
+        : (
+          <Header
+            currentUser={playerSummaries[currentUserId] || {}}
+            partyMembers={selectedUsers.map((userId) => playerSummaries[userId])}
+          >
+            {(partyMemberIds.length < 1) ? (
+              <PartySelector
+                friendIds={friendIds}
+                selectedUsers={selectedUsers}
+                playerSummaries={playerSummaries}
+                toggleSelect={toggleFriendSelect}
+                submitPartyMemberIds={(ids) => setPartyMemberIds(ids)}
+              />
+            ) : (
+              <div>Something</div>
+            )}
+          </Header>
+        )}
+    </Container>
   );
 };
 

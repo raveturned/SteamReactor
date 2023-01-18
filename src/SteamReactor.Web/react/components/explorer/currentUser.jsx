@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import UserAvatar from './userAvatar';
 
 const Root = styled('div')(() => ({
   display: 'flex',
@@ -12,12 +12,7 @@ const CurrentUser = ({ user }) => {
   const displayName = user.name ?? 'Loading...';
   return (
     <Root>
-      <Avatar
-        src={user.avatarMedium}
-        alt={displayName}
-        title={displayName}
-        sx={{ width: 48, height: 48 }}
-      />
+      <UserAvatar user={user} />
       <Typography sx={{ padding: 1.5 }}>{displayName}</Typography>
     </Root>
   );

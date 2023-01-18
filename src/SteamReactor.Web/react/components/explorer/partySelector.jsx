@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@mui/material';
+import { Container } from '@mui/material';
 
 import Friend from './friend';
 
-const FriendList = ({
+const PartySelector = ({
   friendIds,
   selectedUsers,
   playerSummaries,
   toggleSelect,
 }) => (
-  <Box
+  <Container
     sx={{
-      display: 'block',
+      display: 'inline-flex',
+      flexWrap: 'wrap',
     }}
   >
     {friendIds.map((id) => {
@@ -27,14 +28,14 @@ const FriendList = ({
         />
       );
     })}
-  </Box>
+  </Container>
 );
 
-FriendList.propTypes = {
+PartySelector.propTypes = {
   toggleSelect: PropTypes.func.isRequired,
   friendIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedUsers: PropTypes.arrayOf(PropTypes.string).isRequired,
   playerSummaries: PropTypes.objectOf(PropTypes.shape()).isRequired,
 };
 
-export default FriendList;
+export default PartySelector;

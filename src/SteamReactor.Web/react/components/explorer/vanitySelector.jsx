@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Button, TextField } from '@mui/material';
+import {
+  Box, Button, TextField, Typography,
+} from '@mui/material';
+// import { styled } from '@mui/material/styles';
 
 const VanitySelector = ({ submitVanity }) => {
   const [vanity, setVanity] = useState('');
@@ -13,26 +16,39 @@ const VanitySelector = ({ submitVanity }) => {
     <Box
       sx={{
         display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
-      <TextField
-        label="Vanity URL"
-        value={vanity}
-        onChange={handleVanityChange}
-        onKeyDown={({ key }) => {
-          if (key === 'Enter') {
-            submitVanity(vanity);
-          }
+      <Typography>
+        Who are you?
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
         }}
-        sx={{ margin: 1 }}
-      />
-      <Button
-        variant="contained"
-        onClick={() => submitVanity(vanity)}
-        sx={{ margin: 1 }}
       >
-        Fetch
-      </Button>
+        <TextField
+          label="Vanity URL"
+          value={vanity}
+          onChange={handleVanityChange}
+          onKeyDown={({ key }) => {
+            if (key === 'Enter') {
+              submitVanity(vanity);
+            }
+          }}
+          sx={{ margin: 1 }}
+        />
+        <Button
+          variant="contained"
+          onClick={() => submitVanity(vanity)}
+          sx={{ margin: 1 }}
+        >
+          Fetch
+        </Button>
+      </Box>
     </Box>
   );
 };
