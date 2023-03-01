@@ -13,24 +13,25 @@ Initial page asks for steam id or vanity url.
 Once we know which user we're querying:
 - fetch the user's friend list
 - fetch details of each known user
-- fetch details of the games they have
 
 Display list of friends, and allow them to be selected.
 
 ```
-/--------------\/--------------\/--------------\/--------------\
-| /----------\ || /----------\ || /----------\ || /----------\ |
-| |          | || |          | || |          | || |          | |
-| |   Pic    | || |   Pic    | || |   Pic    | || |   Pic    | |
-| |          | || |          | || |          | || |          | |
-| \----------/ || \----------/ || \----------/ || \----------/ |
-|      Me      ||   Friend 1   ||   Friend 2   ||   Friend 3   |
-|   263 games  ||   74 games   ||     N/A      ||  1035 games  |
-\--------------/\--------------/\--------------/\--------------/
+/--------------------\ /--------------------\ /--------------------\
+| /-----\            | | /-----\            | | /-----\            |
+| | Pic | Me         | | | Pic | Friend 1   | | | Pic | Friend 2   |
+| \-----/            | | \-----/            | | \-----/            |
+\--------------------/ \--------------------/ \--------------------/
+/--------------------\ /--------------------\ /--------------------\
+| /-----\            | | /-----\            | | /-----\            |
+| | Pic | Friend 3   | | | Pic | Friend 4   | | | Pic | Friend 5   |
+| \-----/            | | \-----/            | | \-----/            |
+\--------------------/ \--------------------/ \--------------------/
 ```
 
 ### Screen 3: what games do you all have?
-Once we have a list of users and their games, we can list what games are commn to all people:
+Once we have a list of users, fetch the games they own.
+Then can list what games are common to all people:
 
 | Title  | Owner Count | Owners  |
 |--------|-------------|---------|
@@ -38,11 +39,30 @@ Once we have a list of users and their games, we can list what games are commn t
 | Game 2 | 2           | `P P`   |
 | Game 3 | 2           | `P P`   |
 
+Can add more details, e.g. recommendation reason, (see below)
+
 ## ToDo
  - make usable??
-   - make friendlist more friendly
-   - get additional player info (e.g. games owned)
-   - make applist depend on selected friends and their apps
+   - button on screen 2 to say when group has been selected
+   - make screen 3
+     - fetch additional player info (e.g. games owned)
+     - make list, based on literally anything to begin with
+     - fetch additional game info
+       - categories
+       - tags?
+     - interate on list:
+       - looks
+       - recommendations/sorting
+       - performance
+ - game suggestions based on:
+   - categories - do they suggest game is multiplayer?
+     - co-op
+     - multiplayer
+     - valve anti-cheat
+   - player play-time
+     - recent play time
+     - total play time
+   - tags - similar to other games people have high playtime in 
  - consider: containerising?
  - consider: splitting facades from frontend? (separate concerns)
  - consider: using as a test bed for k8s, service discovery
